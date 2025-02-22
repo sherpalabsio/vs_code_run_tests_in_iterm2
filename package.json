@@ -13,8 +13,8 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [{
-      "command": "run-tests-in-iterm2.helloWorld",
-      "title": "Hello World"
+      "command": "run-tests-in-iterm2.runAtCursor",
+      "title": "Run tests in iTerm2: Run test at cursor"
     }]
   },
   "scripts": {
