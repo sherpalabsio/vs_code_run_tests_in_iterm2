@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const { runTestAtCursor } = require('./runTestAtCursor');
+const { runTestAtCursor } = require('./src/runTestAtCursor');
 
 /**
  * @param {vscode.ExtensionContext} context

@@ -1,5 +1,6 @@
 const vscode = require('vscode');
 const { exec } = require('child_process');
+const { getTestCommand } = require('./testCommandHelper');
 
 function runTestAtCursor() {
   const editor = vscode.window.activeTextEditor;
@@ -15,6 +16,7 @@ function runTestAtCursor() {
 
   const appleScript = `
         tell application "iTerm2"
+          activate
           tell current session of current window
             write text "${finalCommand}"
           end tell
@@ -30,29 +32,6 @@ function runTestAtCursor() {
       return;
     }
   });
-}
-
-function getTestCommand(filePath, languageId) {
-  const config = vscode.workspace.getConfiguration('runTestsInIterm2');
-  const customCommands = config.get('customCommands');
-
-  // Check file endings
-  const suffixMatch = customCommands.find(
-    (entry) => entry.suffix && filePath.endsWith(entry.suffix)
-  );
-  if (suffixMatch) {
-    return suffixMatch.command;
-  }
-
-  // Check language ID
-  const languageMatch = customCommands.find(
-    (entry) => entry.language === languageId
-  );
-  if (languageMatch) {
-    return languageMatch.command;
-  }
-
-  return config.get('defaultCommand');
 }
 
 module.exports = {
