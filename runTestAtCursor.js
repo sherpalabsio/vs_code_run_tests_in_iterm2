@@ -33,23 +33,26 @@ function runTestAtCursor() {
 }
 
 function getTestCommand(filePath, languageId) {
-  if (languageId === 'ruby') {
-    if (filePath.endsWith('_spec.rb')) {
-      return 'rspec';
-    }
-    return 'bin/rails test';
+  const config = vscode.workspace.getConfiguration('runTestsInIterm2');
+  const customCommands = config.get('customCommands');
+
+  // Check file endings
+  const suffixMatch = customCommands.find(
+    (entry) => entry.suffix && filePath.endsWith(entry.suffix)
+  );
+  if (suffixMatch) {
+    return suffixMatch.command;
   }
 
-  if (
-    filePath.endsWith('.js') ||
-    filePath.endsWith('.jsx') ||
-    filePath.endsWith('.ts') ||
-    filePath.endsWith('.tsx')
-  ) {
-    return 'tjs';
+  // Check language ID
+  const languageMatch = customCommands.find(
+    (entry) => entry.language === languageId
+  );
+  if (languageMatch) {
+    return languageMatch.command;
   }
 
-  return 't';
+  return config.get('defaultCommand');
 }
 
 module.exports = {
