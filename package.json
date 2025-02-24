@@ -3,6 +3,10 @@
   "displayName": "Run tests in iTerm2",
   "description": "Run a single or multiple tests directly in iTerm2 with the press of a button.",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sherpalabsio/vs_code_run_tests_in_iterm2"
+  },
   "engines": {
     "vscode": "^1.97.0"
   },
@@ -46,6 +50,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "package": "vsce package",
     "pretest": "yarn run lint",
     "test": "vscode-test"
   },
@@ -58,6 +63,7 @@
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.3.9",
     "sinon": "^15.0.0",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "vsce": "^2.15.0"
   }
 }
