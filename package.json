@@ -20,6 +20,10 @@
       {
         "command": "run-tests-in-iterm2.runAtCursor",
         "title": "iTerm2: Run test at cursor"
+      },
+      {
+        "command": "run-tests-in-iterm2.runCurrentFile",
+        "title": "iTerm2: Run current test file"
       }
     ],
     "configuration": {
