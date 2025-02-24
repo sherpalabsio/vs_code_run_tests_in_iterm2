@@ -18,12 +18,16 @@
   "contributes": {
     "commands": [
       {
-        "command": "run-tests-in-iterm2.runAtCursor",
-        "title": "iTerm2: Run test at cursor"
+        "command": "run-tests-in-iterm2.runAll",
+        "title": "iTerm2: Run all tests"
       },
       {
         "command": "run-tests-in-iterm2.runCurrentFile",
         "title": "iTerm2: Run current test file"
+      },
+      {
+        "command": "run-tests-in-iterm2.runAtCursor",
+        "title": "iTerm2: Run test at cursor"
       }
     ],
     "configuration": {

@@ -1,20 +1,25 @@
 const vscode = require('vscode');
-const { runTestAtCursor } = require('./src/runTestAtCursor');
-const { runTestCurrentFile } = require('./src/runTestCurrentFile');
+const { runAll, runCurrentFile, runAtCursor } = require('./src/runners');
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
   let disposable = vscode.commands.registerCommand(
-    'run-tests-in-iterm2.runAtCursor',
-    runTestAtCursor
+    'run-tests-in-iterm2.runAll',
+    runAll
   );
   context.subscriptions.push(disposable);
 
   disposable = vscode.commands.registerCommand(
     'run-tests-in-iterm2.runCurrentFile',
-    runTestCurrentFile
+    runCurrentFile
+  );
+  context.subscriptions.push(disposable);
+
+  disposable = vscode.commands.registerCommand(
+    'run-tests-in-iterm2.runAtCursor',
+    runAtCursor
   );
   context.subscriptions.push(disposable);
 }
