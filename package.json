@@ -19,7 +19,7 @@
     "commands": [
       {
         "command": "run-tests-in-iterm2.runAtCursor",
-        "title": "Run tests in iTerm2: Run test at cursor"
+        "title": "iTerm2: Run test at cursor"
       }
     ],
     "configuration": {
