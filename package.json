@@ -28,7 +28,12 @@
         "runTestsInIterm2": {
           "type": "object",
           "default": {
+            "openNewTab": true,
+            "activateIterm": true,
+            "clearTheScreen": true,
+
             "defaultCommand": "make test",
+
             "customCommands": [
               {
                 "language": "ruby",

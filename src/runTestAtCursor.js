@@ -1,6 +1,6 @@
 const vscode = require('vscode');
-const { exec } = require('child_process');
 const { getTestCommand } = require('./testCommandHelper');
+const iTerm2 = require('./iterm2');
 
 function runTestAtCursor() {
   const editor = vscode.window.activeTextEditor;
@@ -12,26 +12,7 @@ function runTestAtCursor() {
   const command = getTestCommand(filePath, editor.document.languageId);
   const finalCommand = `${command} ${fileAndLine}`;
 
-  console.log(`Running in iTerm2: ${finalCommand}`);
-
-  const appleScript = `
-        tell application "iTerm2"
-          activate
-          tell current session of current window
-            write text "${finalCommand}"
-          end tell
-        end tell
-    `;
-
-  exec(`osascript -e '${appleScript}'`, (error, _stdout, stderr) => {
-    if (error) {
-      console.error(`Running in iTerm2: ${finalCommand}`, error, stderr);
-      vscode.window.showErrorMessage(
-        `Run tests in iTerm2 | Failed to run command: ${error.message}`
-      );
-      return;
-    }
-  });
+  iTerm2.run(finalCommand);
 }
 
 module.exports = {
