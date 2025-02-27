@@ -1,15 +1,41 @@
 const assert = require('assert');
+const { describe, it, beforeEach, afterEach } = require('mocha');
+const sinon = require('sinon');
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
+const childProcess = require('child_process');
 const vscode = require('vscode');
-// const myExtension = require('../extension');
+const iTerm2 = require('../src/iterm2');
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+describe('extension', () => {
+  let execStub, iTerm2Stub;
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-	});
+  beforeEach(() => {
+    execStub = sinon.stub(childProcess, 'exec');
+    iTerm2Stub = sinon.stub(iTerm2, 'prepareScreen');
+  });
+
+  afterEach(() => {
+    execStub.restore();
+    iTerm2Stub.restore();
+  });
+
+  it('runs the correct command for a Ruby file', async () => {
+    const document = await vscode.workspace.openTextDocument({
+      content: 'class TestFile\n  def test_method\n    puts "test"\n  end\nend',
+      language: 'ruby',
+    });
+    const editor = await vscode.window.showTextDocument(document);
+
+    // Move cursor to line 5
+    const position = new vscode.Position(4, 0);
+    editor.selection = new vscode.Selection(position, position);
+
+    await vscode.commands.executeCommand('run-tests-in-iterm2.runAtCursor');
+
+    assert(execStub.calledOnce);
+    const expectedCommand = `rails test ${document.uri.fsPath}:5`;
+    assert(
+      execStub.firstCall.args[0].includes(`write text "${expectedCommand}"`)
+    );
+  });
 });

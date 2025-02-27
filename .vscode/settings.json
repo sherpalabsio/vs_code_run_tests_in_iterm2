@@ -1,0 +1,10 @@
+{
+  "runTestsInIterm2": {
+    "customCommands": [
+      {
+        "suffix": ".test.js",
+        "command": "t"
+      }
+    ]
+  }
+}

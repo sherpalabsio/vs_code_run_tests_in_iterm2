@@ -1,10 +1,8 @@
 const vscode = require('vscode');
-const { exec, execSync } = require('child_process');
+const childProcess = require('child_process');
 
 class iTerm2 {
   static run(command) {
-    console.log(`Running in iTerm2: ${command}`);
-
     iTerm2.prepareScreen();
 
     const appleScript = `
@@ -16,28 +14,33 @@ class iTerm2 {
           end tell
       `;
 
-    exec(`osascript -e '${appleScript}'`, (error, _stdout, stderr) => {
-      if (error) {
-        console.error(`Running in iTerm2: ${command}`, error, stderr);
-        vscode.window.showErrorMessage(
-          `Run tests in iTerm2 | Failed to run command: ${error.message}`
-        );
-        return;
+    console.log(`Running in iTerm2: ${command}`);
+
+    childProcess.exec(
+      `osascript -e '${appleScript}'`,
+      (error, _stdout, stderr) => {
+        if (error) {
+          console.error(`Run test in iTerm2 failed: ${command}`, error, stderr);
+          vscode.window.showErrorMessage(
+            `Run tests in iTerm2 failed: ${error.message}`
+          );
+          return;
+        }
       }
-    });
+    );
   }
 
   static prepareScreen() {
     const config = vscode.workspace.getConfiguration('runTestsInIterm2');
 
-    if (config.get('openNewTab') && iTerm2.isCurrentTabBusy()) {
+    if (config.get('openNewTab') && iTerm2.isCurrentSessionBusy()) {
       iTerm2.openNewTab();
     } else if (config.get('clearTheScreen')) {
       iTerm2.clearTheScreen();
     }
   }
 
-  static isCurrentTabBusy() {
+  static isCurrentSessionBusy() {
     const shell = process.env.SHELL.split('/').pop();
 
     const appleScript = `
@@ -48,15 +51,14 @@ class iTerm2 {
         end tell
       `;
 
-    try {
-      const stdout = execSync(`osascript -e '${appleScript}'`)
-        .toString()
-        .trim();
-      return !stdout.endsWith(`(-${shell})`) && stdout != `-${shell}`;
-    } catch (error) {
-      console.error('Error checking if current tab is busy:', error);
-      return;
-    }
+    const currentSessionTitle = childProcess
+      .execSync(`osascript -e '${appleScript}'`)
+      .toString()
+      .trim();
+    return (
+      !currentSessionTitle.endsWith(`(-${shell})`) &&
+      currentSessionTitle != `-${shell}`
+    );
   }
 
   static clearTheScreen() {
@@ -75,7 +77,7 @@ class iTerm2 {
         end tell
       `;
 
-    execSync(`osascript -e '${appleScript}'`);
+    childProcess.execSync(`osascript -e '${appleScript}'`);
   }
 
   static openNewTab() {
@@ -85,12 +87,12 @@ class iTerm2 {
 
           tell current window
             create tab with default profile
-            delay 0.7
+            delay 0.7 -- wait for the shell to start
           end tell
         end tell
       `;
 
-    execSync(`osascript -e '${appleScript}'`);
+    childProcess.execSync(`osascript -e '${appleScript}'`);
   }
 }
 
