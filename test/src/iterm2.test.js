@@ -6,14 +6,16 @@ const childProcess = require('child_process');
 const iTerm2 = require('../../src/iterm2');
 
 describe('.isCurrentSessionBusy', () => {
-  let execSyncStub;
+  let execSyncStub, shellStub;
 
   beforeEach(() => {
     execSyncStub = sinon.stub(childProcess, 'execSync');
+    shellStub = sinon.stub(process.env, 'SHELL').value('/bin/zsh');
   });
 
   afterEach(() => {
     execSyncStub.restore();
+    shellStub.restore();
   });
 
   it('returns false when the current session is busy', async () => {
