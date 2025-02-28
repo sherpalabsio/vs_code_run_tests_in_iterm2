@@ -39,6 +39,7 @@
             "bringIterm2ForwardOnExecution": true,
             "openNewTab": true,
             "clearTheScreen": true,
+            "optimizeForTMUX": false,
 
             "defaultCommand": "make test",
 

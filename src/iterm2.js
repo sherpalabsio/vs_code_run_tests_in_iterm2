@@ -39,7 +39,11 @@ class iTerm2 {
   static prepareScreen() {
     const config = vscode.workspace.getConfiguration('runTestsInIterm2');
 
-    if (config.get('openNewTab') && iTerm2.isCurrentSessionBusy()) {
+    if (
+      config.get('openNewTab') &&
+      !config.get('optimizeForTMUX') &&
+      iTerm2.isCurrentSessionBusy()
+    ) {
       iTerm2.openNewTab();
     } else if (config.get('clearTheScreen')) {
       iTerm2.clearTheScreen();
@@ -68,6 +72,11 @@ class iTerm2 {
   }
 
   static clearTheScreen() {
+    const config = vscode.workspace.getConfiguration('runTestsInIterm2');
+    const clearScreenCommand = config.get('optimizeForTMUX')
+      ? 'write text "clear"'
+      : 'write text "printf \\"\\\\33c\\\\e[3J\\""';
+
     const appleScript = `
       tell application "iTerm"
         tell current session of current window
@@ -75,7 +84,7 @@ class iTerm2 {
           write text (ASCII character 3) newline NO
 
           -- Clear the screen
-          write text "printf \\"\\\\33c\\\\e[3J\\""
+          ${clearScreenCommand}
           delay 0.1
         end tell
       end tell
