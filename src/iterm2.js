@@ -5,9 +5,15 @@ class iTerm2 {
   static run(command) {
     iTerm2.prepareScreen();
 
+    const config = vscode.workspace.getConfiguration('runTestsInIterm2');
+    const activationScript = config.get('bringIterm2ForwardOnExecution')
+      ? 'activate'
+      : '';
+
     const appleScript = `
       tell application "iTerm2"
-        activate
+        ${activationScript}
+
         tell current session of current window
           write text "${command}"
         end tell
@@ -64,8 +70,6 @@ class iTerm2 {
   static clearTheScreen() {
     const appleScript = `
       tell application "iTerm"
-        activate
-
         tell current session of current window
           -- Send Ctrl+C to clear the current prompt
           write text (ASCII character 3) newline NO
