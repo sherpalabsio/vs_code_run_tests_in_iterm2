@@ -6,13 +6,13 @@ class iTerm2 {
     iTerm2.prepareScreen();
 
     const appleScript = `
-          tell application "iTerm2"
-            activate
-            tell current session of current window
-              write text "${command}"
-            end tell
-          end tell
-      `;
+      tell application "iTerm2"
+        activate
+        tell current session of current window
+          write text "${command}"
+        end tell
+      end tell
+    `;
 
     console.log(`Running in iTerm2: ${command}`);
 
@@ -63,19 +63,19 @@ class iTerm2 {
 
   static clearTheScreen() {
     const appleScript = `
-        tell application "iTerm"
-          activate
+      tell application "iTerm"
+        activate
 
-          tell current session of current window
-            -- Send Ctrl+C to clear the current prompt
-            write text (ASCII character 3) newline NO
+        tell current session of current window
+          -- Send Ctrl+C to clear the current prompt
+          write text (ASCII character 3) newline NO
 
-            -- Clear the screen
-            write text "printf \\"\\\\33c\\\\e[3J\\""
-            delay 0.1
-          end tell
+          -- Clear the screen
+          write text "printf \\"\\\\33c\\\\e[3J\\""
+          delay 0.1
         end tell
-      `;
+      end tell
+    `;
 
     childProcess.execSync(`osascript -e '${appleScript}'`);
   }

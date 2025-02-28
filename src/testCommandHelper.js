@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 
-function getTestCommand(filePath, languageId) {
+function getCommand(filePath, languageId) {
   const config = vscode.workspace.getConfiguration('runTestsInIterm2');
   const customCommands = config.get('customCommands');
 
@@ -24,5 +24,5 @@ function getTestCommand(filePath, languageId) {
 }
 
 module.exports = {
-  getTestCommand,
+  getCommand,
 };
