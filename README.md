@@ -12,7 +12,7 @@
 ## openNewTab
 
 - Default: `true`
-- Description: Open a new tab in iTerm and run the test there when the current session in iTerm2 is running something e.g. an app server. This is not supported in tmux so make sure to set the `iUseTmux` to `true` or this setting to `false` to avoid new tabs being constantly opened.
+- Description: Run the tests in a new iTerm2 tab when the current iTerm2 session is running something e.g. an app server. This is not supported for tmux so make sure to set the `iUseTmux` correctly to avoid new tabs being constantly opened.
 
 ## clearTheScreen
 
@@ -22,16 +22,16 @@
 ## iUseTmux
 
 - Default: `false`
-- Description: Some features are not supported in tmux, and some need to be adjusted to work with tmux. Set this to `true` to avoid weird behavior when using tmux.
+- Description: Some features are not supported in tmux, and some need to be adjusted to work with tmux. Set this to `true` to avoid weird behavior in tmux.
 
 ## defaultTestRunner
 
 - Default: `make test`
-- Description: Specify a default command to run when no specific command is found for the current file. This is useful when you have a single command to run all tests in your project.
+- Description: The default command to run when no specific command is found for the current file. This is also used to run all tests.
 
 ## testRunners
 
-- Description: Specify what command to use for a specific language or file suffix. Suffixes take precedence over languages.
+- Description: Specify what command to use for a specific file suffix or language. Suffixes take precedence over languages.
 
 ### Example
 
