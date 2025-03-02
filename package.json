@@ -44,24 +44,7 @@
 
             "defaultTestRunner": "make test",
 
-            "defaultTestRunners": [
-              {
-                "language": "ruby",
-                "command": "rails test"
-              },
-              {
-                "suffix": "_spec.rb",
-                "command": "rspec"
-              },
-              {
-                "language": "elixir",
-                "command": "mix test"
-              },
-              {
-                "language": "javascript",
-                "command": "yarn test"
-              }
-            ]
+            "testRunners": []
           }
         }
       }

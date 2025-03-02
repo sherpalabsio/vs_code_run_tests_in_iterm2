@@ -1,9 +1,27 @@
 const vscode = require('vscode');
 
+const defaultTestRunners = [
+  {
+    language: 'ruby',
+    command: 'rails test',
+  },
+  {
+    suffix: '_spec.rb',
+    command: 'rspec',
+  },
+  {
+    language: 'elixir',
+    command: 'mix test',
+  },
+  {
+    language: 'javascript',
+    command: 'yarn test',
+  },
+];
+
 function getExecutable(filePath, languageId) {
   const config = vscode.workspace.getConfiguration('runTestsInIterm2');
   const userSpecifiedTestRunners = config.get('testRunners');
-  const defaultTestRunners = config.get('defaultTestRunners');
   const testRunners = userSpecifiedTestRunners.concat(defaultTestRunners);
 
   // Check file endings
