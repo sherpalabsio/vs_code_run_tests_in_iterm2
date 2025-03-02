@@ -2,6 +2,7 @@
   "name": "run-tests-in-iterm2",
   "displayName": "Run tests in iTerm2",
   "description": "Run a single or multiple tests directly in iTerm2 with the press of a button.",
+  "publisher": "sherpalabsio",
   "version": "0.0.1",
   "repository": {
     "type": "git",
