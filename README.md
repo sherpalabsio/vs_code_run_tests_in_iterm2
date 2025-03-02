@@ -50,10 +50,9 @@
 ]
 ```
 
-## Example settings.json
+## Default settings (settings.json)
 
 ```json
-// settings.json
 "runTestsInIterm2": {
   "bringIterm2ForwardOnExecution": true,
   "openNewTab": true,
@@ -83,10 +82,15 @@
 }
 ```
 
-# Commands
+# Available commands
+
+- run-tests-in-iterm2.runAll
+- run-tests-in-iterm2.runCurrentFile
+- run-tests-in-iterm2.runAtCursor
+
+# Recommended keybindings (keybindings.json)
 
 ```json
-// keybindings.json
 {
   "key": "cmd+; cmd+a",
   "command": "run-tests-in-iterm2.runAll",
@@ -101,5 +105,5 @@
   "key": "cmd+; cmd+l",
   "command": "run-tests-in-iterm2.runAtCursor",
   "when": "editorTextFocus"
-},
+}
 ```
