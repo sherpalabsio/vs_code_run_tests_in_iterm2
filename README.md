@@ -62,7 +62,7 @@
 
   "testRunners": [
     {
-      "language": "ruby",
+      "suffix": "_test.rb",
       "command": "rails test"
     },
     {

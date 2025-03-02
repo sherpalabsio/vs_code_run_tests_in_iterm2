@@ -2,7 +2,7 @@ const vscode = require('vscode');
 
 const defaultTestRunners = [
   {
-    language: 'ruby',
+    suffix: '_test.rb',
     command: 'rails test',
   },
   {

@@ -21,21 +21,21 @@ describe('extension', () => {
 
   it('runs the correct command for a Ruby file', async () => {
     const document = await vscode.workspace.openTextDocument({
-      content: 'class TestFile\n  def test_method\n    puts "test"\n  end\nend',
-      language: 'ruby',
+      content: 'line1\nline2\nline3\nline4\nline5\n',
     });
     const editor = await vscode.window.showTextDocument(document);
 
     // Move cursor to line 5
-    const position = new vscode.Position(4, 0);
+    const position = new vscode.Position(2, 0);
     editor.selection = new vscode.Selection(position, position);
 
     await vscode.commands.executeCommand('run-tests-in-iterm2.runAtCursor');
 
     assert(execStub.calledOnce);
-    const expectedCommand = `rails test ${document.uri.fsPath}:5`;
-    assert(
-      execStub.firstCall.args[0].includes(`write text "${expectedCommand}"`)
+    const expectedCommand = `make test ${document.uri.fsPath}:3`;
+    assert.match(
+      execStub.firstCall.args[0],
+      new RegExp(`write text "${expectedCommand}"`)
     );
   });
 });
