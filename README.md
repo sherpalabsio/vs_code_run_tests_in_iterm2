@@ -52,33 +52,30 @@
 ## Default configuration (settings.json)
 
 ```json
-"runTestsInIterm2": {
-  "bringIterm2ForwardOnExecution": true,
-  "openNewTab": true,
-  "clearTheScreen": true,
-  "iUseTmux": false,
+"runTestsInIterm2.bringIterm2ForwardOnExecution": true,
+"runTestsInIterm2.openNewTab": true,
+"runTestsInIterm2.clearTheScreen": true,
+"runTestsInIterm2.iUseTmux": false,
 
-  "defaultTestRunner": "make test",
-
-  "testRunners": [
-    {
-      "suffix": "_test.rb",
-      "command": "rails test"
-    },
-    {
-      "suffix": "_spec.rb",
-      "command": "rspec"
-    },
-    {
-      "language": "elixir",
-      "command": "mix test"
-    },
-    {
-      "language": "javascript",
-      "command": "yarn test"
-    }
-  ]
-}
+"runTestsInIterm2.defaultTestRunner": "make test",
+"runTestsInIterm2.testRunners": [
+  {
+    "suffix": "_test.rb",
+    "command": "rails test"
+  },
+  {
+    "suffix": "_spec.rb",
+    "command": "rspec"
+  },
+  {
+    "language": "elixir",
+    "command": "mix test"
+  },
+  {
+    "language": "javascript",
+    "command": "yarn test"
+  }
+]
 ```
 
 # Available commands
