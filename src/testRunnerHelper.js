@@ -2,7 +2,9 @@ const vscode = require('vscode');
 
 function getExecutable(filePath, languageId) {
   const config = vscode.workspace.getConfiguration('runTestsInIterm2');
-  const testRunners = config.get('testRunners');
+  const userSpecifiedTestRunners = config.get('testRunners');
+  const defaultTestRunners = config.get('defaultTestRunners');
+  const testRunners = userSpecifiedTestRunners.concat(defaultTestRunners);
 
   // Check file endings
   const suffixMatch = testRunners.find(
@@ -16,9 +18,8 @@ function getExecutable(filePath, languageId) {
   const languageMatch = testRunners.find(
     (entry) => entry.language === languageId
   );
-  if (languageMatch) {
-    return languageMatch.command;
-  }
+
+  if (languageMatch) return languageMatch.command;
 
   return config.get('defaultTestRunner');
 }

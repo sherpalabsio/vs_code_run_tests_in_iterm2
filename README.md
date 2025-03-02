@@ -32,7 +32,8 @@
 
 ## testRunners
 
-- Description: Specify what command to use for a specific language or file suffix.
+- Default: `[]`
+- Description: Specify what command to use for a specific language or file suffix. Suffixes take precedence over languages.
 
 ### Example
 
