@@ -1,6 +1,6 @@
 {
   "runTestsInIterm2": {
-    "customCommands": [
+    "testRunners": [
       {
         "suffix": ".test.js",
         "command": "t"

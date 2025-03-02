@@ -42,9 +42,9 @@
             "clearTheScreen": true,
             "iUseTmux": false,
 
-            "defaultCommand": "make test",
+            "defaultTestRunner": "make test",
 
-            "customCommands": [
+            "testRunners": [
               {
                 "language": "ruby",
                 "command": "rails test"

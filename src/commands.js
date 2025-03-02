@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const { getCommand } = require('./testCommandHelper');
+const { getExecutable } = require('./testRunnerHelper');
 const iTerm2 = require('./iterm2');
 const path = require('path');
 
@@ -8,10 +8,10 @@ function runAll() {
   if (!editor) return;
 
   const filePath = editor.document.uri.fsPath;
-  const command = getCommand(filePath, editor.document.languageId);
-  const finalCommand = `${command}`;
+  const executable = getExecutable(filePath, editor.document.languageId);
+  const command = `${executable}`;
 
-  iTerm2.run(finalCommand);
+  iTerm2.run(command);
 }
 
 function runCurrentFile() {
@@ -19,10 +19,10 @@ function runCurrentFile() {
   if (!editor) return;
 
   const filePath = getCurrentFilePath();
-  const command = getCommand(filePath, editor.document.languageId);
-  const finalCommand = `${command} ${filePath}`;
+  const executable = getExecutable(filePath, editor.document.languageId);
+  const command = `${executable} ${filePath}`;
 
-  iTerm2.run(finalCommand);
+  iTerm2.run(command);
 }
 
 function runAtCursor() {
@@ -32,10 +32,10 @@ function runAtCursor() {
   const filePath = getCurrentFilePath();
   const lineNumber = editor.selection.active.line + 1; // +1 because VSCode uses 0-based line numbers
   const fileAndLine = `${filePath}:${lineNumber}`;
-  const command = getCommand(filePath, editor.document.languageId);
-  const finalCommand = `${command} ${fileAndLine}`;
+  const executable = getExecutable(filePath, editor.document.languageId);
+  const command = `${executable} ${fileAndLine}`;
 
-  iTerm2.run(finalCommand);
+  iTerm2.run(command);
 }
 
 function getCurrentFilePath() {

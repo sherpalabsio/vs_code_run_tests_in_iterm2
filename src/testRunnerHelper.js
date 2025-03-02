@@ -1,11 +1,11 @@
 const vscode = require('vscode');
 
-function getCommand(filePath, languageId) {
+function getExecutable(filePath, languageId) {
   const config = vscode.workspace.getConfiguration('runTestsInIterm2');
-  const customCommands = config.get('customCommands');
+  const testRunners = config.get('testRunners');
 
   // Check file endings
-  const suffixMatch = customCommands.find(
+  const suffixMatch = testRunners.find(
     (entry) => entry.suffix && filePath.endsWith(entry.suffix)
   );
   if (suffixMatch) {
@@ -13,16 +13,16 @@ function getCommand(filePath, languageId) {
   }
 
   // Check language ID
-  const languageMatch = customCommands.find(
+  const languageMatch = testRunners.find(
     (entry) => entry.language === languageId
   );
   if (languageMatch) {
     return languageMatch.command;
   }
 
-  return config.get('defaultCommand');
+  return config.get('defaultTestRunner');
 }
 
 module.exports = {
-  getCommand,
+  getExecutable,
 };

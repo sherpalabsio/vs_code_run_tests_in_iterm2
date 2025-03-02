@@ -25,32 +25,31 @@
 - Default: `false`
 - Description: Some features are not supported in tmux, and some need to be adjusted to work with tmux. Set this to `true` to avoid weird behavior when using tmux.
 
-## defaultCommand
+## defaultTestRunner
 
 - Default: `make test`
-- Description: The command to run when no custom command is found for the current file or language. Running the whole test suite is using this command too.
+- Description: Specify a default command to run when no specific command is found for the current file. This is useful when you have a single command to run all tests in your project.
 
-## customCommands
+## testRunners
 
-- Default: `[]`
-- Description: An array of custom commands to run for specific languages or file types. The `language` key is used to match the language of the current file, and the `suffix` key is used to match the file name. If both are present, the `suffix` key is used. The `command` key is the command to run. The command is run in the directory of the current file.
+- Description: Specify what command to use for a specific language or file suffix.
+
+### Example
 
 ```json
-{
-  "language": "ruby",
-  "command": "rails test"
-},
-{
-  "suffix": "_spec.rb",
-  "command": "rspec"
-},
-{
-  "language": "javascript",
-  "command": "yarn test"
-}
+"testRunners": [
+  {
+    "language": "ruby",
+    "command": "rails test"
+  },
+  {
+    "suffix": "_spec.rb",
+    "command": "rspec"
+  },
+]
 ```
 
-## Defaults
+## Example settings.json
 
 ```json
 // settings.json
@@ -60,9 +59,9 @@
   "clearTheScreen": true,
   "iUseTmux": false,
 
-  "defaultCommand": "make test",
+  "defaultTestRunner": "make test",
 
-  "customCommands": [
+  "testRunners": [
     {
       "language": "ruby",
       "command": "rails test"

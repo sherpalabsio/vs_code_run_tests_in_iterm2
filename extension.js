@@ -1,5 +1,5 @@
 const vscode = require('vscode');
-const { runAll, runCurrentFile, runAtCursor } = require('./src/runners');
+const { runAll, runCurrentFile, runAtCursor } = require('./src/commands');
 
 /**
  * @param {vscode.ExtensionContext} context
