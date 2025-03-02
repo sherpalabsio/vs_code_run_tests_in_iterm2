@@ -41,7 +41,7 @@ class iTerm2 {
 
     if (
       config.get('openNewTab') &&
-      !config.get('optimizeForTMUX') &&
+      !config.get('iUseTmux') &&
       iTerm2.isCurrentSessionBusy()
     ) {
       iTerm2.openNewTab();
@@ -73,7 +73,7 @@ class iTerm2 {
 
   static clearTheScreen() {
     const config = vscode.workspace.getConfiguration('runTestsInIterm2');
-    const clearScreenCommand = config.get('optimizeForTMUX')
+    const clearScreenCommand = config.get('iUseTmux')
       ? 'write text "clear"'
       : 'write text "printf \\"\\\\33c\\\\e[3J\\""';
 

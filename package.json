@@ -39,7 +39,7 @@
             "bringIterm2ForwardOnExecution": true,
             "openNewTab": true,
             "clearTheScreen": true,
-            "optimizeForTMUX": false,
+            "iUseTmux": false,
 
             "defaultCommand": "make test",
 
