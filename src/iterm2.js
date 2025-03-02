@@ -80,8 +80,8 @@ class iTerm2 {
     const appleScript = `
       tell application "iTerm"
         tell current session of current window
-          -- Send Ctrl+C to clear the current prompt
-          write text (ASCII character 3) newline NO
+          -- Clear the current prompt - Equivalent to Ctrl+U (delete line in Bash)
+          write text (ASCII character 21) without newline
 
           -- Clear the screen
           ${clearScreenCommand}
