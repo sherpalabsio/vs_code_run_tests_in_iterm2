@@ -71,6 +71,10 @@
       "command": "rspec"
     },
     {
+      "language": "elixir",
+      "command": "mix test"
+    },
+    {
       "language": "javascript",
       "command": "yarn test"
     }
