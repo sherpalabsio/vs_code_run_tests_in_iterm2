@@ -17,8 +17,7 @@
 ## clearTheScreen
 
 - Default: `true`
-- Description: Clear the screen before running a test. This also removes any text typed into the prompt. This works differently in tmux so make sure to set the `iUseTmux` to `true` if you are using tmux.
-
+- Description: Clear the screen before running a test. This also removes any text typed into the prompt.
 
 ## iUseTmux
 

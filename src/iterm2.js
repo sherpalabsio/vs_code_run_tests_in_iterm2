@@ -72,19 +72,14 @@ class iTerm2 {
   }
 
   static clearTheScreen() {
-    const config = vscode.workspace.getConfiguration('runTestsInIterm2');
-    const clearScreenCommand = config.get('iUseTmux')
-      ? 'write text "clear"'
-      : 'write text "printf \\"\\\\33c\\\\e[3J\\""';
-
     const appleScript = `
       tell application "iTerm"
         tell current session of current window
           -- Clear the current prompt - Equivalent to Ctrl+U (delete line in Bash)
           write text (ASCII character 21) without newline
 
-          -- Clear the screen
-          ${clearScreenCommand}
+          -- Clear the screen and the scrollback buffer
+          write text "clear && printf \\"\\\\e[3J\\""
           delay 0.1
         end tell
       end tell
