@@ -4,6 +4,7 @@ help:
 	@echo 'uninstall_locally - Uninstall the installed extension'
 	@echo 'publish_login     - Login to the publisher account'
 	@echo 'publish           - Publish the extension to the marketplace'
+	@echo 'prepublish        - Publish the extension to the marketplace as a pre-release'
 
 .PHONY: install_locally
 install_locally:
@@ -22,3 +23,7 @@ publish_login:
 .PHONY: publish
 publish:
 	yarn vsce publish
+
+.PHONY: prepublish
+publish:
+	yarn vsce publish --pre-release

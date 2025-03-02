@@ -2,7 +2,7 @@
 
 # Feature highlights
 
-# Settings
+# Configuration
 
 ## bringIterm2ForwardOnExecution
 
@@ -49,7 +49,7 @@
 ]
 ```
 
-## Default settings (settings.json)
+## Default configuration (settings.json)
 
 ```json
 "runTestsInIterm2": {
