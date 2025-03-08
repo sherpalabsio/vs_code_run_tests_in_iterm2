@@ -1,6 +1,14 @@
 # Run tests in iTerm2
 
+![Demo](media/demo.gif)
+
 # Feature highlights
+
+- It opens a new tab when the current iTerm2 session is running something e.g. an app server.
+  - Not supported for tmux.
+- It clears the screen before running a test.
+- It clears the prompt before running a test.
+  - So you don't have to worry about that you run something else by mistake.
 
 # Configuration
 
